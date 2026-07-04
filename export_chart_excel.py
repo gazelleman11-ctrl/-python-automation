@@ -148,10 +148,10 @@ def write_excel(df: pd.DataFrame) -> None:
 
     data_ref = Reference(ws,
                          min_col=3, max_col=3,
-                         min_row=3, max_row=3 + len(df) - 1)
+                         min_row=3, max_row=3 + len(df))   # row3=ヘッダー、row4〜 がデータ
     cats_ref = Reference(ws,
                          min_col=1,
-                         min_row=4, max_row=3 + len(df))
+                         min_row=4, max_row=3 + len(df))   # 商品名（ヘッダー除く）
 
     chart.add_data(data_ref, titles_from_data=True)
     chart.set_categories(cats_ref)
