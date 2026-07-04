@@ -62,9 +62,11 @@ def make_charts(df: pd.DataFrame, col_name: str, col_count: str, col_amount: str
     import matplotlib.pyplot as plt
     import matplotlib.font_manager as fm
 
-    # 日本語フォントを探す（なければデフォルト）
+    # 日本語フォントを探す（西洋フォントのGothicを除外）
+    JP_KEYWORDS = ("Meiryo", "Yu Gothic", "MS Gothic", "MS PGothic",
+                   "BIZ UD", "Noto Sans CJK", "IPAGothic")
     jp_fonts = [f.name for f in fm.fontManager.ttflist
-                if any(k in f.name for k in ("Gothic", "Meiryo", "Yu", "Noto"))]
+                if any(f.name.startswith(k) for k in JP_KEYWORDS)]
     font = jp_fonts[0] if jp_fonts else None
     if font:
         plt.rcParams["font.family"] = font
